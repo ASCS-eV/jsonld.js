@@ -9,7 +9,9 @@
   as a relative IRI, and `compact` wrote such compact IRIs. With a term such as
   `:a/`, `compact` wrote `:a/:b`, which does not expand back to the IRI.
   - **NOTE**: This changes the output of `expand`, `compact`, `toRDF` and
-    `canonize` for contexts with such terms.
+    `canonize` for contexts with such terms. A context with a term such as
+    `/a/:b` can now fail, or newly pass, the check that the term expands to
+    its own IRI.
 
 ## 9.0.0 - 2025-11-20
 
