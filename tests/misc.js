@@ -292,6 +292,28 @@ describe('loading multiple levels of contexts', () => {
   });
 });
 
+describe('url tests', () => {
+  it('should detect absolute IRIs', done => {
+    // absolute IRIs
+    assert(jsonld.url.isAbsolute('a:'));
+    assert(jsonld.url.isAbsolute('a:b'));
+    assert(jsonld.url.isAbsolute('a:b:c'));
+    // blank nodes
+    assert(jsonld.url.isAbsolute('_:'));
+    assert(jsonld.url.isAbsolute('_:a'));
+    assert(jsonld.url.isAbsolute('_:a:b'));
+
+    // not absolute or blank node
+    assert(!jsonld.url.isAbsolute(':'));
+    assert(!jsonld.url.isAbsolute('a'));
+    assert(!jsonld.url.isAbsolute('/:'));
+    assert(!jsonld.url.isAbsolute('/a:'));
+    assert(!jsonld.url.isAbsolute('/a:b'));
+    assert(!jsonld.url.isAbsolute('_'));
+    done();
+  });
+});
+
 // Create Term Definition, step 14.2.5: only a simple term without ':' or '/'
 // may be a prefix
 describe('terms with a colon or slash', () => {
@@ -353,28 +375,6 @@ describe('terms with a colon or slash', () => {
         }]);
       }
     });
-});
-
-describe('url tests', () => {
-  it('should detect absolute IRIs', done => {
-    // absolute IRIs
-    assert(jsonld.url.isAbsolute('a:'));
-    assert(jsonld.url.isAbsolute('a:b'));
-    assert(jsonld.url.isAbsolute('a:b:c'));
-    // blank nodes
-    assert(jsonld.url.isAbsolute('_:'));
-    assert(jsonld.url.isAbsolute('_:a'));
-    assert(jsonld.url.isAbsolute('_:a:b'));
-
-    // not absolute or blank node
-    assert(!jsonld.url.isAbsolute(':'));
-    assert(!jsonld.url.isAbsolute('a'));
-    assert(!jsonld.url.isAbsolute('/:'));
-    assert(!jsonld.url.isAbsolute('/a:'));
-    assert(!jsonld.url.isAbsolute('/a:b'));
-    assert(!jsonld.url.isAbsolute('_'));
-    done();
-  });
 });
 
 describe('js keywords', () => {
